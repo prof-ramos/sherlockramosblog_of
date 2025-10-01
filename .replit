@@ -1,0 +1,17 @@
+run = "hugo && miniserve public --index index.html"
+entrypoint = "content/posts/hello.md"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+build = ["hugo"]
+deploymentTarget = "static"
+publicDir = "public"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[agent]
+expertMode = true
