@@ -11,6 +11,7 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 - Set language to Portuguese (pt-br)
 - Created /about/ page
 - Configured ProfileMode with welcome message and social icons
+- **Security Fix**: Patched XSS vulnerability in search functionality (fastsearch.js) by replacing innerHTML with safe DOM methods
 
 # User Preferences
 

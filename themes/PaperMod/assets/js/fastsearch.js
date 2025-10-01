@@ -68,7 +68,8 @@ function activeToggle(ae) {
 
 function reset() {
     resultsAvailable = false;
-    resList.innerHTML = sInput.value = ''; // clear inputbox and searchResults
+    resList.replaceChildren(); // clear searchResults safely
+    sInput.value = ''; // clear inputbox
     sInput.focus(); // shift focus to input box
 }
 
@@ -85,20 +86,31 @@ sInput.onkeyup = function (e) {
         }
         if (results.length !== 0) {
             // build our html if result exists
-            let resultSet = ''; // our results bucket
+            resList.replaceChildren(); // clear previous results safely
 
             for (let item in results) {
-                resultSet += `<li class="post-entry"><header class="entry-header">${results[item].item.title}&nbsp;»</header>` +
-                    `<a href="${results[item].item.permalink}" aria-label="${results[item].item.title}"></a></li>`
+                const li = document.createElement('li');
+                li.className = 'post-entry';
+                
+                const header = document.createElement('header');
+                header.className = 'entry-header';
+                header.textContent = results[item].item.title + '\u00A0»';
+                
+                const a = document.createElement('a');
+                a.href = results[item].item.permalink;
+                a.setAttribute('aria-label', results[item].item.title);
+                
+                li.appendChild(header);
+                li.appendChild(a);
+                resList.appendChild(li);
             }
 
-            resList.innerHTML = resultSet;
             resultsAvailable = true;
             first = resList.firstChild;
             last = resList.lastChild;
         } else {
             resultsAvailable = false;
-            resList.innerHTML = '';
+            resList.replaceChildren();
         }
     }
 }
