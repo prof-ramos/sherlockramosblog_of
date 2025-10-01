@@ -10,8 +10,36 @@ deploymentTarget = "static"
 publicDir = "public"
 
 [[ports]]
-localPort = 8080
+localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 45421
+externalPort = 3000
 
 [agent]
 expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Hugo Server"
+
+[[workflows.workflow]]
+name = "Hugo Server"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "~/.local/bin/hugo server --bind 0.0.0.0 --port 5000 --baseURL / --appendPort=false"
+waitForPort = 5000

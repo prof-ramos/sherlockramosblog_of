@@ -1,0 +1,78 @@
+baseURL: '/'
+languageCode: pt-br
+defaultContentLanguage: pt-br
+title: 'My New Hugo Site'
+theme: PaperMod
+
+params:
+  env: production
+  description: "Meu site pessoal"
+  author: Me
+  
+  # ProfileMode (ProfileMod)
+  profileMode:
+    enabled: true
+    title: "Bem-vindo ao meu site"
+    subtitle: "Este é meu site pessoal usando Hugo PaperMod"
+    imageUrl: "" # URL da sua imagem de perfil
+    imageTitle: "Minha foto"
+    imageWidth: 120
+    imageHeight: 120
+    buttons:
+      - name: Posts
+        url: /posts/
+      - name: Sobre
+        url: /about/
+
+  # Configurações do PaperMod
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+
+  # Ícones de redes sociais
+  socialIcons:
+    - name: github
+      url: "https://github.com/"
+    - name: twitter
+      url: "https://twitter.com/"
+    - name: linkedin
+      url: "https://linkedin.com/"
+
+  # Cover image
+  cover:
+    hidden: false
+    hiddenInList: false
+    hiddenInSingle: false
+
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: about
+      name: Sobre
+      url: /about/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
