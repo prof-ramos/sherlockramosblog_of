@@ -1,0 +1,25 @@
+/* Navy Theme - Modo Claro */
+:root {
+    --theme: #e8edf4 !important;
+    --entry: #d4dae3 !important;
+    --primary: #0f1419 !important;
+    --secondary: #1a2332 !important;
+    --tertiary: rgba(15, 20, 25, 0.12) !important;
+    --content: #0f1419 !important;
+    --code-block-bg: #1a1f2e !important;
+    --code-bg: #cbd3df !important;
+    --border: #a8b2c0 !important;
+}
+
+/* Navy Theme - Modo Escuro */
+.dark {
+    --theme: #0f1419 !important;
+    --entry: #161b2e !important;
+    --primary: #e8edf4 !important;
+    --secondary: #b8c2d0 !important;
+    --tertiary: rgba(232, 237, 244, 0.08) !important;
+    --content: #d4dae3 !important;
+    --code-block-bg: #0a0d12 !important;
+    --code-bg: #1a1f2e !important;
+    --border: #2a3040 !important;
+}

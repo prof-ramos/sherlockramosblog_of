@@ -4,6 +4,12 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 
 # Recent Changes
 
+**October 3, 2025**
+- Applied custom dark navy theme colors (replaces gray with navy blue)
+- Created internal documentation manuals in `/docs`:
+  - 1-personalizacao.md (customization guide)
+  - 2-criacao-de-conteudo.md (content creation guide)
+
 **October 1, 2025**
 - Installed PaperMod theme with ProfileMode enabled
 - Upgraded Hugo from v0.126.1 to v0.146.0 (installed binary at ~/.local/bin/hugo)
