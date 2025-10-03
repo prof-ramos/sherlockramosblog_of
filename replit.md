@@ -9,6 +9,7 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 - Created internal documentation manuals in `/docs`:
   - 1-personalizacao.md (customization guide)
   - 2-criacao-de-conteudo.md (content creation guide)
+  - 3-mudanca-tema-navy.md (navy theme implementation documentation)
 
 **October 1, 2025**
 - Installed PaperMod theme with ProfileMode enabled
