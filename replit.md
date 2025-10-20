@@ -4,6 +4,12 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 
 # Recent Changes
 
+**October 20, 2025**
+- Configured deployment settings for production (autoscale mode)
+- Hugo binary reinstalled and verified (v0.146.0)
+- Deployment ready with proper baseURL configuration
+- Created comprehensive UI/UX evaluation report in `/docs/4-avaliacao-ui-ux.md`
+
 **October 3, 2025**
 - Applied custom dark navy theme colors (replaces gray with navy blue)
 - Created internal documentation manuals in `/docs`:
@@ -86,7 +92,10 @@ Preferred communication style: Simple, everyday language.
 - Hugo handles all asset processing (CSS, JS minification, bundling)
 
 ## Hosting/Deployment
-- Static files in `/public` can be deployed to any static hosting service (Netlify, Vercel, GitHub Pages, etc.)
+- **Deployment Type**: Autoscale (configured for Replit deployment)
+- **Production Command**: Hugo server with proper bind settings (0.0.0.0:5000)
+- **BaseURL**: Dynamically set to "/" for flexible deployment
+- Static files in `/public` can also be deployed to any static hosting service (Netlify, Vercel, GitHub Pages, etc.)
 - No server-side runtime dependencies
 
 ## Browser APIs

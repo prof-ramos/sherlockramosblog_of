@@ -6,8 +6,9 @@ channel = "stable-24_05"
 
 [deployment]
 build = ["hugo"]
-deploymentTarget = "static"
+deploymentTarget = "autoscale"
 publicDir = "public"
+run = ["~/.local/bin/hugo", "server", "--bind", "0.0.0.0", "--port", "5000", "--baseURL", "/", "--appendPort=false"]
 
 [[ports]]
 localPort = 5000
