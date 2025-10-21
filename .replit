@@ -5,7 +5,7 @@ entrypoint = "content/posts/hello.md"
 channel = "stable-24_05"
 
 [deployment]
-build = ["bash", "-c", "mkdir -p ~/.local/bin && curl -L https://github.com/gohugoio/hugo/releases/download/v0.146.0/hugo_extended_0.146.0_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz && tar -xzf /tmp/hugo.tar.gz -C /tmp && mv /tmp/hugo ~/.local/bin/hugo && chmod +x ~/.local/bin/hugo && ~/.local/bin/hugo --gc"]
+build = ["bash", "build.sh"]
 deploymentTarget = "autoscale"
 publicDir = "public"
 run = ["~/.local/bin/hugo", "server", "--bind", "0.0.0.0", "--port", "5000", "--baseURL", "/", "--appendPort=false"]

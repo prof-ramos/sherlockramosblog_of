@@ -5,12 +5,13 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 # Recent Changes
 
 **October 21, 2025**
-- Fixed deployment issues:
+- Fixed deployment issues (final):
   - Created missing `google_analytics.html` partial template in PaperMod theme
-  - Updated deployment build command to download and use Hugo v0.146.0
-  - Configured build process to avoid minification issues
-  - Verified build generates 14 pages successfully
-- Deployment status: ✅ Ready for production
+  - Created dedicated `build.sh` script that ensures Hugo v0.146.0 is used
+  - Updated deployment config to use build.sh (bypasses old Nix Hugo v0.126.1)
+  - Verified build generates 14 pages successfully in ~280ms
+  - All deployment tests passing
+- Deployment status: ✅ Ready for production (verified)
 
 **October 20, 2025**
 - Configured deployment settings for production (autoscale mode)
