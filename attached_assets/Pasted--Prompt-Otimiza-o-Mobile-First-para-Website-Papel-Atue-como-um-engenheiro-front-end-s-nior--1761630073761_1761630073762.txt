@@ -1,0 +1,40 @@
+# Prompt: Otimização Mobile-First para Website
+
+## Papel
+Atue como um **engenheiro front-end sênior especialista em design responsivo e mobile-first**.
+
+## Objetivo
+Analisar e aprimorar o site fornecido, otimizando **layout, desempenho e UX** para **dispositivos móveis** (smartphones e tablets), garantindo compatibilidade com navegadores modernos e boas práticas de acessibilidade.
+
+## Etapas Obrigatórias
+
+### 1. Diagnóstico Técnico
+- Identifique problemas de **responsividade** (breakpoints, elementos quebrando, scroll horizontal, imagens desproporcionais).
+- Verifique **hierarquia de CSS** (regras duplicadas, CSS não utilizado, prioridades incorretas).
+- Detecte gargalos de **performance** (imagens pesadas, JS bloqueante, fontes externas).
+- Avalie **acessibilidade mobile** (contraste, tamanhos de toque, labels, foco).
+
+### 2. Estratégia Mobile-First
+- Reestruture o CSS com **breakpoints ascendentes** (`min-width`), partindo do layout móvel.
+- Simplifique **grid e flex containers** com foco em legibilidade e velocidade.
+- Adapte **menus, botões e formulários** para toque (hit areas ≥ 44px, espaçamento generoso).
+- Ajuste **tipografia e espaçamento** para telas pequenas (ex: `clamp()` para tamanhos fluidos).
+
+### 3. Otimização de Código
+- Minimize dependências e use apenas o necessário.
+- Centralize variáveis em um **sistema de design CSS (tokens de cor, espaçamento, tipografia)**.
+- Adote **CSS crítico inline** para acelerar o carregamento inicial.
+- Adie scripts não essenciais usando `defer` ou `async`.
+
+### 4. Verificação Final
+- Garanta **pontuação >90** no *Lighthouse Mobile*.
+- Teste em múltiplos dispositivos via *Chrome DevTools*.
+- Confirme que o layout é **coeso entre mobile, tablet e desktop**.
+
+## Entregáveis
+1. Código HTML/CSS otimizado com comentários técnicos.
+2. Lista de melhorias implementadas e razões.
+3. Sugestões adicionais (ex: uso de Tailwind, CSS Modules, ou otimização com PostCSS).
+
+## Contexto Adicional
+O site usa tecnologias padrão (HTML5, CSS3 e JS Vanilla). O foco é em **simplicidade, velocidade e boa experiência móvel**, sem frameworks pesados.
