@@ -1,20 +1,33 @@
 <style>
 /* ===== MENU MINIMALISTA UX/UI ===== */
 
-/* Header Desktop */
+/* Header com melhor contraste */
 .header {
     backdrop-filter: blur(10px);
-    background: rgba(232, 237, 244, 0.9);
-    border-bottom: 1px solid rgba(15, 20, 25, 0.08);
+    background: rgba(232, 237, 244, 0.98);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.1);
+    box-shadow: 0 1px 3px rgba(15, 20, 25, 0.08);
     transition: all 0.3s ease;
 }
 
 .dark .header {
-    background: rgba(15, 20, 25, 0.9);
-    border-bottom: 1px solid rgba(232, 237, 244, 0.08);
+    background: rgba(15, 20, 25, 0.98);
+    border-bottom: 1px solid rgba(232, 237, 244, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Nav alignment fix */
+.nav {
+    display: flex;
+    align-items: center;
 }
 
 /* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo a {
     font-weight: 600;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,9 +37,23 @@
     transform: translateY(-1px);
 }
 
+/* Logo switches alignment */
+.logo-switches {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /* Desktop Menu */
 #menu {
     gap: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+#menu li {
+    display: flex;
+    align-items: center;
 }
 
 #menu li a {
@@ -35,6 +62,8 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
     font-size: 0.95rem;
+    display: flex;
+    align-items: center;
 }
 
 #menu li a:hover {
@@ -64,11 +93,20 @@
     border-radius: 2px;
 }
 
-/* Theme toggle */
+/* Theme toggle alignment */
 #theme-toggle {
     border-radius: 8px;
     padding: 0.5rem;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+#theme-toggle svg {
+    display: block;
 }
 
 #theme-toggle:hover {
@@ -84,7 +122,10 @@
 @media (max-width: 768px) {
     /* Hamburger button */
     #menu-toggle {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 44px;
         height: 44px;
         background: transparent;
@@ -93,6 +134,7 @@
         padding: 10px;
         z-index: 1001;
         position: relative;
+        gap: 5px;
     }
     
     #menu-toggle span {
@@ -100,7 +142,6 @@
         width: 24px;
         height: 2px;
         background: var(--primary);
-        margin: 5px 0;
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         border-radius: 2px;
     }
@@ -130,14 +171,15 @@
         padding: 80px 0 20px;
         flex-direction: column;
         gap: 0;
+        align-items: stretch;
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         overflow-y: auto;
     }
     
     .dark #menu {
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
     }
     
     #menu.active {
@@ -198,20 +240,16 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.6);
         z-index: 999;
         opacity: 0;
         transition: opacity 0.3s ease;
+        backdrop-filter: blur(2px);
     }
     
     #menu-overlay.active {
         display: block;
         opacity: 1;
-    }
-    
-    /* Hide desktop elements */
-    .nav {
-        justify-content: space-between;
     }
 }
 
