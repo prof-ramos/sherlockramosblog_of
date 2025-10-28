@@ -192,3 +192,35 @@
     });
 })();
 </script>
+
+<!-- WebP Support Detection -->
+<script src="/js/webp-support.js"></script>
+
+<!-- Service Worker Registration (PWA + Offline Support) -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#161b2e">
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function(registration) {
+                console.log('[SW] Service Worker registered successfully:', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', function() {
+                    const newWorker = registration.installing;
+                    console.log('[SW] New Service Worker found, installing...');
+                    
+                    newWorker.addEventListener('statechange', function() {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('[SW] New version available! Reload to update.');
+                        }
+                    });
+                });
+            })
+            .catch(function(error) {
+                console.error('[SW] Service Worker registration failed:', error);
+            });
+    });
+}
+</script>

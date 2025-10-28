@@ -1,0 +1,41 @@
+{{/* 
+  WebP Image with Fallback Shortcode
+  
+  Usage:
+  {{< webp-image src="image.jpg" alt="Description" >}}
+  
+  Parameters:
+  - src: Path to JPG/PNG image (required)
+  - alt: Alt text for accessibility (required)
+  - class: CSS class (optional)
+  - width: Image width (optional)
+  - height: Image height (optional)
+  - loading: lazy or eager (default: lazy)
+*/}}
+
+{{- $src := .Get "src" }}
+{{- $alt := .Get "alt" }}
+{{- $class := .Get "class" | default "" }}
+{{- $width := .Get "width" }}
+{{- $height := .Get "height" }}
+{{- $loading := .Get "loading" | default "lazy" }}
+
+{{- /* Extract file name and extension */}}
+{{- $ext := path.Ext $src }}
+{{- $base := strings.TrimSuffix $ext $src }}
+{{- $webpSrc := printf "%s.webp" $base }}
+
+<picture class="{{ $class }}">
+  {{- /* WebP source for modern browsers */}}
+  <source srcset="{{ $webpSrc }}" type="image/webp">
+  
+  {{- /* Fallback to original format (JPG/PNG) for older browsers */}}
+  <img 
+    src="{{ $src }}" 
+    alt="{{ $alt }}"
+    {{ with $width }}width="{{ . }}"{{ end }}
+    {{ with $height }}height="{{ . }}"{{ end }}
+    loading="{{ $loading }}"
+    decoding="async"
+  >
+</picture>
