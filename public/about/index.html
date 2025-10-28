@@ -125,7 +125,304 @@ body:not(.dark) #sun{display:none}
         }
 
     </style>
-</noscript><meta property="og:url" content="/about/">
+</noscript><style>
+ 
+
+ 
+.header {
+    backdrop-filter: blur(10px);
+    background: rgba(232, 237, 244, 0.9);
+    border-bottom: 1px solid rgba(15, 20, 25, 0.08);
+    transition: all 0.3s ease;
+}
+
+.dark .header {
+    background: rgba(15, 20, 25, 0.9);
+    border-bottom: 1px solid rgba(232, 237, 244, 0.08);
+}
+
+ 
+.logo a {
+    font-weight: 600;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo a:hover {
+    transform: translateY(-1px);
+}
+
+ 
+#menu {
+    gap: 0.5rem;
+}
+
+#menu li a {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+#menu li a:hover {
+    background: rgba(15, 20, 25, 0.08);
+    transform: translateY(-2px);
+}
+
+.dark #menu li a:hover {
+    background: rgba(232, 237, 244, 0.08);
+}
+
+ 
+#menu li a span.active {
+    color: var(--primary);
+    font-weight: 600;
+    position: relative;
+}
+
+#menu li a span.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+ 
+#theme-toggle {
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background: rgba(15, 20, 25, 0.08);
+    transform: rotate(15deg) scale(1.05);
+}
+
+.dark #theme-toggle:hover {
+    background: rgba(232, 237, 244, 0.08);
+}
+
+ 
+@media (max-width: 768px) {
+     
+    #menu-toggle {
+        display: block;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1001;
+        position: relative;
+    }
+    
+    #menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--primary);
+        margin: 5px 0;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border-radius: 2px;
+    }
+    
+     
+    #menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+    
+    #menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    
+    #menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+     
+    #menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--theme);
+        padding: 80px 0 20px;
+        flex-direction: column;
+        gap: 0;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        overflow-y: auto;
+    }
+    
+    .dark #menu {
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    #menu.active {
+        right: 0;
+    }
+    
+    #menu li {
+        width: 100%;
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.3s ease;
+    }
+    
+    #menu.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    #menu.active li:nth-child(1) { transition-delay: 0.1s; }
+    #menu.active li:nth-child(2) { transition-delay: 0.15s; }
+    #menu.active li:nth-child(3) { transition-delay: 0.2s; }
+    #menu.active li:nth-child(4) { transition-delay: 0.25s; }
+    
+    #menu li a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 0;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    #menu li a:hover,
+    #menu li a:active {
+        background: rgba(15, 20, 25, 0.08);
+        border-left-color: var(--primary);
+        transform: translateX(4px);
+    }
+    
+    .dark #menu li a:hover,
+    .dark #menu li a:active {
+        background: rgba(232, 237, 244, 0.08);
+    }
+    
+    #menu li a span.active::after {
+        display: none;
+    }
+    
+    #menu li a span.active {
+        border-left: 3px solid var(--primary);
+    }
+    
+     
+    #menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    #menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    
+     
+    .nav {
+        justify-content: space-between;
+    }
+}
+
+ 
+@media (min-width: 769px) {
+    #menu-toggle,
+    #menu-overlay {
+        display: none !important;
+    }
+}
+
+ 
+#menu li a:focus-visible,
+#theme-toggle:focus-visible,
+#menu-toggle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+ 
+body.menu-open {
+    overflow: hidden;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 768) {
+        
+        const nav = document.querySelector('.nav');
+        const menu = document.getElementById('menu');
+        
+        if (!document.getElementById('menu-toggle')) {
+            const toggleBtn = document.createElement('button');
+            toggleBtn.id = 'menu-toggle';
+            toggleBtn.setAttribute('aria-label', 'Toggle menu');
+            toggleBtn.innerHTML = '<span></span><span></span><span></span>';
+            
+            const overlay = document.createElement('div');
+            overlay.id = 'menu-overlay';
+            
+            nav.appendChild(toggleBtn);
+            document.body.appendChild(overlay);
+            
+            
+            toggleBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            
+            overlay.addEventListener('click', function() {
+                toggleBtn.classList.remove('active');
+                menu.classList.remove('active');
+                this.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+            
+            
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    toggleBtn.classList.remove('active');
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        }
+    }
+});
+
+
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        location.reload();
+    }, 500);
+});
+</script>
+<meta property="og:url" content="/about/">
   <meta property="og:site_name" content="Sherlock Ramos">
   <meta property="og:title" content="Sobre">
   <meta property="og:description" content="Esta é a página sobre mim.

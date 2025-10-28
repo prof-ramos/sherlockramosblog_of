@@ -5,6 +5,13 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 # Recent Changes
 
 **October 28, 2025**
+- **Redesign Minimalista do Menu**:
+  - Removido ícones sociais (GitHub, LinkedIn) - mantido apenas Twitter
+  - Criado menu de navegação minimalista com efeitos UX/UI modernos
+  - Efeitos implementados: glassmorphism, hover com elevação, indicador de página ativa
+  - Animações suaves (cubic-bezier) e micro-interações
+  - Menu totalmente acessível (focus states, keyboard navigation)
+  - Responsivo com design mobile-first
 - **Implemented 3 Critical Frontend Performance Optimizations** (documented in `/docs/7-otimizacoes-frontend.md`):
   1. **Search System Optimization** (`fastsearch.js`):
      - Lazy loading of search index (loads only when needed)
