@@ -1,348 +1,147 @@
-<style>
-/* ===== MENU MINIMALISTA UX/UI ===== */
-
-/* Header com melhor contraste */
-.header {
-    backdrop-filter: blur(10px);
-    background: rgba(232, 237, 244, 0.98);
-    border-bottom: 1px solid rgba(15, 20, 25, 0.1);
-    box-shadow: 0 1px 3px rgba(15, 20, 25, 0.08);
-    transition: all 0.3s ease;
-}
-
-.dark .header {
-    background: rgba(15, 20, 25, 0.98);
-    border-bottom: 1px solid rgba(232, 237, 244, 0.1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* Nav alignment fix */
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Logo */
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo a {
-    font-weight: 600;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo a:hover {
-    transform: translateY(-1px);
-}
-
-/* Logo switches alignment */
-.logo-switches {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* Desktop Menu */
-#menu {
-    gap: 0.5rem;
-    display: flex;
-    align-items: center;
-}
-
-#menu li {
-    display: flex;
-    align-items: center;
-}
-
-#menu li a {
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 500;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-}
-
-#menu li a:hover {
-    background: rgba(15, 20, 25, 0.08);
-    transform: translateY(-2px);
-}
-
-.dark #menu li a:hover {
-    background: rgba(232, 237, 244, 0.08);
-}
-
-/* Active page indicator */
-#menu li a span.active {
-    color: var(--primary);
-    font-weight: 600;
-    position: relative;
-}
-
-#menu li a span.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--primary);
-    border-radius: 2px;
-}
-
-/* Theme toggle alignment */
-#theme-toggle {
-    border-radius: 8px;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-}
-
-#theme-toggle svg {
-    display: block;
-}
-
-#theme-toggle:hover {
-    background: rgba(15, 20, 25, 0.08);
-    transform: rotate(15deg) scale(1.05);
-}
-
-.dark #theme-toggle:hover {
-    background: rgba(232, 237, 244, 0.08);
-}
-
-/* Mobile hamburger button */
-.mobile-menu-btn {
-    display: none;
-    width: 44px;
-    height: 44px;
-    background: rgba(15, 20, 25, 0.08);
-    border: 2px solid rgba(15, 20, 25, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-}
-
-.dark .mobile-menu-btn {
-    background: rgba(232, 237, 244, 0.08);
-    border-color: rgba(232, 237, 244, 0.2);
-}
-
-.mobile-menu-btn:hover {
-    background: rgba(15, 20, 25, 0.15);
-    border-color: rgba(15, 20, 25, 0.3);
-    transform: scale(1.05);
-}
-
-.dark .mobile-menu-btn:hover {
-    background: rgba(232, 237, 244, 0.15);
-    border-color: rgba(232, 237, 244, 0.3);
-}
-
-.mobile-menu-btn span {
-    display: block;
-    width: 22px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-
-.mobile-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 768px) {
-    /* Show hamburger button */
-    .mobile-menu-btn {
-        display: flex;
-    }
-    
-    /* Hide desktop menu */
-    #menu {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
-        background: var(--theme);
-        padding: 80px 0 20px;
-        flex-direction: column;
-        gap: 0;
-        align-items: stretch;
-        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        overflow-y: auto;
-    }
-    
-    .dark #menu {
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.6);
-    }
-    
-    #menu.show-menu {
-        display: flex;
-        right: 0;
-    }
-    
-    #menu li {
-        width: 100%;
-        opacity: 0;
-        transform: translateX(50px);
-        transition: all 0.3s ease;
-    }
-    
-    #menu.show-menu li {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    #menu.show-menu li:nth-child(1) { transition-delay: 0.1s; }
-    #menu.show-menu li:nth-child(2) { transition-delay: 0.15s; }
-    #menu.show-menu li:nth-child(3) { transition-delay: 0.2s; }
-    
-    #menu li a {
-        display: block;
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-        border-radius: 0;
-        border-left: 3px solid transparent;
-        transition: all 0.3s ease;
-    }
-    
-    #menu li a:hover,
-    #menu li a:active {
-        background: rgba(15, 20, 25, 0.08);
-        border-left-color: var(--primary);
-        transform: translateX(4px);
-    }
-    
-    .dark #menu li a:hover,
-    .dark #menu li a:active {
-        background: rgba(232, 237, 244, 0.08);
-    }
-    
-    /* Overlay */
-    .menu-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 999;
-        backdrop-filter: blur(2px);
-    }
-    
-    .menu-overlay.show {
-        display: block;
-    }
-}
-
-/* Desktop - show normal menu */
-@media (min-width: 769px) {
-    .mobile-menu-btn {
-        display: none !important;
-    }
-    
-    #menu {
-        display: flex !important;
-    }
-}
-
-/* Accessibility */
-#menu li a:focus-visible,
-#theme-toggle:focus-visible,
-.mobile-menu-btn:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
-}
-
-/* Prevent body scroll when menu is open */
-body.menu-open {
-    overflow: hidden;
-}
-</style>
-
+<!-- Mobile-First Menu JavaScript (Responsive, no memory leaks) -->
 <script>
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Only run on mobile
-    if (window.innerWidth > 768) return;
+(function() {
+    'use strict';
     
-    // Create mobile menu button
-    const nav = document.querySelector('.nav');
-    if (!nav) return;
+    let menuBtn = null;
+    let overlay = null;
+    let menu = null;
+    const MOBILE_BREAKPOINT = 1024;
     
-    const menuBtn = document.createElement('button');
-    menuBtn.className = 'mobile-menu-btn';
-    menuBtn.setAttribute('aria-label', 'Menu');
-    menuBtn.innerHTML = '<span></span><span></span><span></span>';
+    // Named functions for event handlers (prevents memory leaks)
+    function handleEscKey(e) {
+        if (e.key === 'Escape' && menu && menu.classList.contains('show-menu')) {
+            toggleMenu();
+        }
+    }
     
-    // Insert button at the end of nav
-    nav.appendChild(menuBtn);
+    function handleMenuClick(e) {
+        // Event delegation - close menu when clicking on links or their children
+        const link = e.target.closest('a');
+        if (link && menu.contains(link)) {
+            toggleMenu();
+        }
+    }
     
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'menu-overlay';
-    document.body.appendChild(overlay);
+    function isMobile() {
+        return window.innerWidth < MOBILE_BREAKPOINT;
+    }
     
-    const menu = document.getElementById('menu');
-    if (!menu) return;
-    
-    // Toggle menu
-    menuBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    function cleanup() {
+        // Remove menu-open class from body
+        document.body.classList.remove('menu-open');
         
-        this.classList.toggle('active');
+        // Clean menu state
+        if (menu) {
+            menu.classList.remove('show-menu');
+        }
+        
+        // Clean button state
+        if (menuBtn) {
+            menuBtn.classList.remove('active');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+        
+        // Clean overlay
+        if (overlay) {
+            overlay.classList.remove('show');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+    }
+    
+    function toggleMenu() {
+        if (!menu || !menuBtn || !overlay) return;
+        
+        const isOpen = menuBtn.classList.contains('active');
+        
+        menuBtn.classList.toggle('active');
         menu.classList.toggle('show-menu');
         overlay.classList.toggle('show');
         document.body.classList.toggle('menu-open');
+        
+        // Update ARIA
+        menuBtn.setAttribute('aria-expanded', !isOpen);
+        overlay.setAttribute('aria-hidden', isOpen);
+    }
+    
+    function createMobileMenu() {
+        const nav = document.querySelector('.nav');
+        if (!nav || menuBtn) return; // Already created
+        
+        // Create button
+        menuBtn = document.createElement('button');
+        menuBtn.className = 'mobile-menu-btn';
+        menuBtn.setAttribute('aria-label', 'Menu');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.innerHTML = '<span></span><span></span><span></span>';
+        nav.appendChild(menuBtn);
+        
+        // Create overlay
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(overlay);
+        
+        // Get menu
+        menu = document.getElementById('menu');
+        if (!menu) return;
+        
+        // Events - all named functions, added once
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        menu.addEventListener('click', handleMenuClick); // Event delegation with closest()
+        document.addEventListener('keydown', handleEscKey);
+    }
+    
+    function removeMobileMenu() {
+        // Cleanup state first
+        cleanup();
+        
+        // Remove ALL event listeners - PREVENTS MEMORY LEAKS
+        if (menu) {
+            menu.removeEventListener('click', handleMenuClick);
+        }
+        document.removeEventListener('keydown', handleEscKey);
+        
+        // Remove DOM elements
+        if (menuBtn && menuBtn.parentNode) {
+            menuBtn.parentNode.removeChild(menuBtn);
+            menuBtn = null;
+        }
+        
+        if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+            overlay = null;
+        }
+        
+        // Clear menu reference
+        menu = null;
+    }
+    
+    function handleResize() {
+        if (isMobile()) {
+            // Mobile/Tablet - ensure menu button exists
+            createMobileMenu();
+        } else {
+            // Desktop - remove menu button and cleanup
+            removeMobileMenu();
+        }
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+        handleResize();
     });
     
-    // Close on overlay click
-    overlay.addEventListener('click', function() {
-        menuBtn.classList.remove('active');
-        menu.classList.remove('show-menu');
-        this.classList.remove('show');
-        document.body.classList.remove('menu-open');
+    // Handle resize and orientation change
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(handleResize, 150);
     });
     
-    // Close on link click
-    menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-            menuBtn.classList.remove('active');
-            menu.classList.remove('show-menu');
-            overlay.classList.remove('show');
-            document.body.classList.remove('menu-open');
-        });
+    window.addEventListener('orientationchange', function() {
+        setTimeout(handleResize, 200);
     });
-});
+})();
 </script>

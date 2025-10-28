@@ -1,49 +1,77 @@
-@media screen and (max-width: 768px) {
-    /* theme-vars */
+/* ========================================
+   MEDIA QUERIES - MOBILE FIRST
+   Converted: October 28, 2025
+   Strategy: Progressive enhancement (min-width)
+   ======================================== */
+
+/* ===== BASE: MOBILE (< 640px) ===== */
+/* Estilos base estão definidos nos arquivos principais */
+/* Sem media query = mobile first */
+
+/* ===== TABLET UP (640px+) ===== */
+@media screen and (min-width: 640px) {
     :root {
-        --gap: 14px;
+        --gap: 18px;
     }
+}
 
-    /* profile-mode */
+/* ===== DESKTOP SMALL (769px+) ===== */
+@media screen and (min-width: 769px) {
+    :root {
+        --gap: 20px;
+    }
+    
+    /* profile-mode - aumenta imagem */
     .profile img {
-        transform: scale(0.85);
+        transform: scale(1);
     }
-
-    /* post-entry */
+    
+    /* post-entry - altura maior */
     .first-entry {
-        min-height: 260px;
+        min-height: 320px;
     }
-
-    /* archive */
+    
+    /* archive - layout horizontal */
     .archive-month {
-        flex-direction: column;
+        flex-direction: row;
     }
-
+    
     .archive-year {
-        margin-top: 20px;
+        margin-top: 0;
     }
+}
 
-    /* footer */
+/* ===== DESKTOP MEDIUM (901px+) ===== */
+@media screen and (min-width: 901px) {
+    :root {
+        --gap: 24px;
+    }
+    
+    /* footer - padding padrão */
     .footer {
-        padding: calc((var(--footer-height) - var(--gap) - 10px) / 2) var(--gap);
+        padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
     }
-}
-
-/* footer */
-@media screen and (max-width: 900px) {
+    
+    /* top-link - posição normal */
     .list .top-link {
-        transform: translateY(-5rem);
+        transform: translateY(0);
     }
 }
 
-@media screen and (max-width: 340px) {
-    .share-buttons {
-        justify-content: unset;
-    }
+/* ===== DESKTOP LARGE (1024px+) ===== */
+@media screen and (min-width: 1024px) {
+    /* Estilos desktop completos */
+    /* Menu desktop está em mobile-first.css */
 }
 
+/* ===== WIDE SCREEN (1440px+) ===== */
+@media screen and (min-width: 1440px) {
+    /* Otimizações para telas grandes */
+}
+
+/* ===== ACESSIBILIDADE ===== */
+/* Respeita preferência de animação reduzida */
 @media (prefers-reduced-motion) {
-    /* terms; profile-mode; post-single; post-entry; post-entry; search; search */
     .terms-tags a:active,
     .button:active,
     .post-entry:active,
@@ -51,5 +79,18 @@
     #searchResults .focus,
     #searchResults li:active {
         transform: none;
+    }
+}
+
+/* ===== EDGE CASES ===== */
+/* Apenas quando absolutamente necessário */
+@media screen and (max-width: 340px) {
+    .share-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .share-buttons a {
+        margin: 4px 0;
     }
 }
