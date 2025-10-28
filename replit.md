@@ -11,6 +11,7 @@ This is a Hugo static site generator project configured with the PaperMod theme 
   - Configured media uploads to `static/images/`
   - Created comprehensive guide in `/docs/5-usando-pagescms.md`
 - CMS ready to use at https://pagescms.org (requires GitHub connection)
+- Customized footer: Changed from "Powered by Hugo & PaperMod" to "In Memoriam - Zé Bitela (Poeta, seresteiro e cantor)"
 
 **October 21, 2025**
 - Fixed deployment issues (final):
