@@ -5,6 +5,15 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 # Recent Changes
 
 **October 28, 2025**
+- **✅ Implementadas TODAS as 4 Melhorias Opcionais** (documented in `/docs/11-relatorio-melhorias-finais.md`):
+  1. **Fallback sem JavaScript**: Menu funciona nativamente com `<details>`/`<summary>` (progressive enhancement)
+  2. **Lazy-load Chroma CSS**: Syntax highlighting (~3.5KB) carregado apenas em páginas com código
+  3. **Service Worker + PWA**: Cache offline, instalável como app, fallback page (/offline.html)
+  4. **WebP Images**: Shortcode `{{< webp-image >}}` com fallback automático para browsers antigos
+  - **Todas as 4 tarefas aprovadas pelo Architect** ✅
+  - **Impacto**: ~3.5KB economizados em páginas sem código, site funciona offline, imagens 30-50% menores
+  - **Arquivos criados**: sw.js, manifest.json, offline.md, webp-image.html, webp-support.js, chroma-lazy.css
+  - **Status**: PRODUCTION-READY ✅
 - **Implementação Completa Mobile-First CSS** (documented in `/docs/8-diagnostico-mobile-first.md`):
   - **Breakpoints invertidos**: Desktop-first (`max-width`) → Mobile-first (`min-width`)
   - **CSS movido para arquivo externo**: 291 linhas inline → 9 linhas (redução de 97%)
