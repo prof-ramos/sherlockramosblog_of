@@ -12,6 +12,10 @@ This is a Hugo static site generator project configured with the PaperMod theme 
   - Animações suaves (cubic-bezier) e micro-interações
   - Menu totalmente acessível (focus states, keyboard navigation)
   - Responsivo com design mobile-first
+  - Menu hambúrguer mobile otimizado: background sutil, borda definida, linhas 3px, sombra
+- **Botões de Compartilhamento Personalizados**:
+  - Mantidos apenas 3 redes nos posts: Twitter/X, WhatsApp, Instagram
+  - Removidos: LinkedIn, Reddit, Facebook, Telegram, YCombinator
 - **Implemented 3 Critical Frontend Performance Optimizations** (documented in `/docs/7-otimizacoes-frontend.md`):
   1. **Search System Optimization** (`fastsearch.js`):
      - Lazy loading of search index (loads only when needed)
