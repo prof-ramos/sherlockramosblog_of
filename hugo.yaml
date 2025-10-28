@@ -1,19 +1,19 @@
 baseURL: '/'
 languageCode: pt-br
 defaultContentLanguage: pt-br
-title: 'My New Hugo Site'
+title: 'Sherlock Ramos'
 theme: PaperMod
 
 params:
   env: production
-  description: "Meu site pessoal"
+  description: ""
   author: Me
   
   # ProfileMode (ProfileMod)
   profileMode:
     enabled: true
-    title: "Bem-vindo ao meu site"
-    subtitle: "Este é meu site pessoal usando Hugo PaperMod"
+    title: "Bem-vindo ao meu caos"
+    subtitle: ""
     imageUrl: "" # URL da sua imagem de perfil
     imageTitle: "Minha foto"
     imageWidth: 120
