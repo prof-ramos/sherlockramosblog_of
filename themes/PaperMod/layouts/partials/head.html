@@ -38,7 +38,10 @@
 
 {{- /* Styles */}}
 
-{{- /* includes */}}
+{{- /* Critical CSS Inline (for fastest First Contentful Paint) */}}
+{{- partial "critical_css.html" . }}
+
+{{- /* Non-Critical CSS - Loaded Asynchronously */}}
 {{- $includes := slice }}
 {{- $includes = $includes | append (" " | resources.FromString "assets/css/includes-blank.css")}}
 
@@ -69,9 +72,11 @@
 
 {{- if not site.Params.assets.disableFingerprinting }}
 {{- $stylesheet := $stylesheet | fingerprint }}
-<link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" integrity="{{ $stylesheet.Data.Integrity }}" rel="preload stylesheet" as="style">
+<link rel="preload" href="{{ $stylesheet.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="{{ $stylesheet.Data.Integrity }}" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="{{ $stylesheet.RelPermalink }}" integrity="{{ $stylesheet.Data.Integrity }}" crossorigin="anonymous"></noscript>
 {{- else }}
-<link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" rel="preload stylesheet" as="style">
+<link rel="preload" href="{{ $stylesheet.RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="{{ $stylesheet.RelPermalink }}" crossorigin="anonymous"></noscript>
 {{- end }}
 
 {{- /* Search */}}

@@ -10,8 +10,76 @@
 
 <meta name="description" content="">
 <meta name="author" content="Me">
-<link rel="canonical" href="/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.6fed10b77d0d3a9e449b15918b473ec07133c692fd38fc993e88e64e46712fbc.css" integrity="sha256-b&#43;0Qt30NOp5EmxWRi0c&#43;wHEzxpL9OPyZPojmTkZxL7w=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="/"><style>
+ 
+
+ 
+*,::after,::before{box-sizing:border-box}
+html{-webkit-tap-highlight-color:transparent;overflow-y:scroll}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;font-size:18px;line-height:1.6;background:var(--theme);color:var(--primary)}
+a{text-decoration:none;color:var(--primary)}
+h1,h2,h3,h4,h5,h6{line-height:1.2;margin:0;color:var(--primary)}
+p,ul{margin:0;padding:0}
+img{display:block;max-width:100%}
+
+ 
+:root{
+    --gap:24px;
+    --content-gap:20px;
+    --nav-width:1024px;
+    --main-width:720px;
+    --header-height:60px;
+    --footer-height:60px;
+    --radius:8px;
+    --theme:#e8edf4;
+    --entry:#d4dae3;
+    --primary:#0f1419;
+    --secondary:#1a2332;
+    --tertiary:rgba(15,20,25,0.12);
+    --content:#0f1419;
+    --border:#a8b2c0;
+}
+
+.dark{
+    --theme:#0f1419;
+    --entry:#161b2e;
+    --primary:#e8edf4;
+    --secondary:#b8c2d0;
+    --tertiary:rgba(232,237,244,0.08);
+    --content:#d4dae3;
+    --border:#2a3040;
+}
+
+ 
+.nav{display:flex;flex-wrap:wrap;justify-content:space-between;max-width:calc(var(--nav-width) + var(--gap)*2);margin-inline:auto;line-height:var(--header-height)}
+.nav a{display:block}
+.logo,#menu{display:flex;margin:auto var(--gap)}
+.logo a{font-size:24px;font-weight:700}
+#menu{list-style:none;white-space:nowrap}
+#menu li+li{margin-inline-start:var(--gap)}
+#menu a{font-size:16px}
+button#theme-toggle{font-size:26px;margin:auto 4px}
+body.dark #moon{display:none}
+body:not(.dark) #sun{display:none}
+
+ 
+.main{position:relative;min-height:calc(100vh - var(--header-height) - var(--footer-height));max-width:calc(var(--main-width) + var(--gap)*2);margin:auto;padding:var(--gap)}
+.main .profile{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - var(--header-height) - var(--footer-height) - var(--gap)*2);text-align:center}
+.profile .profile_inner{display:flex;flex-direction:column;align-items:center;gap:10px}
+.profile img{border-radius:50%}
+.buttons{display:flex;justify-content:center;flex-wrap:wrap;max-width:400px}
+.button{background:var(--tertiary);border-radius:var(--radius);margin:8px;padding:6px;transition:transform .1s}
+.button:active{transform:scale(.96)}
+
+ 
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+ 
+#theme-toggle,.top-link{display:inline-block}
+</style>
+
+<link rel="preload" href="/assets/css/stylesheet.6fed10b77d0d3a9e449b15918b473ec07133c692fd38fc993e88e64e46712fbc.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-b&#43;0Qt30NOp5EmxWRi0c&#43;wHEzxpL9OPyZPojmTkZxL7w=" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="/assets/css/stylesheet.6fed10b77d0d3a9e449b15918b473ec07133c692fd38fc993e88e64e46712fbc.css" integrity="sha256-b&#43;0Qt30NOp5EmxWRi0c&#43;wHEzxpL9OPyZPojmTkZxL7w=" crossorigin="anonymous"></noscript>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -204,58 +272,116 @@
 </a>
 
 <script>
-    let menu = document.getElementById('menu')
+(function() {
+    'use strict';
+    
+    const menu = document.getElementById('menu');
     if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        const savedPosition = localStorage.getItem('menu-scroll-position');
+        if (savedPosition) {
+            menu.scrollLeft = parseInt(savedPosition, 10);
         }
+        
+        let scrollTimeout;
+        menu.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                localStorage.setItem('menu-scroll-position', menu.scrollLeft);
+            }, 100);
+        }, { passive: true });
     }
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    document.body.addEventListener('click', function(e) {
+        const target = e.target.closest('a[href^="#"]');
+        
+        if (!target) return;
+        
+        e.preventDefault();
+        
+        const href = target.getAttribute('href');
+        const id = href.substring(1);
+        
+        if (!id) return;
+        
+        const targetElement = document.getElementById(decodeURIComponent(id));
+        
+        if (!targetElement) return;
+        
+        if (!prefersReducedMotion) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        } else {
+            targetElement.scrollIntoView({
+                block: 'start'
+            });
+        }
+        
+        if (id === 'top') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        } else {
+            history.pushState(null, null, '#' + id);
+        }
     });
 
+})();
 </script>
 <script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
+(function() {
+    'use strict';
+    
+    const topLink = document.getElementById('top-link');
+    if (!topLink) return;
+    
+    const SCROLL_THRESHOLD = 800;
+    let ticking = false;
+    
+    function updateTopLinkVisibility() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        
+        if (scrollTop > SCROLL_THRESHOLD) {
+            topLink.style.visibility = 'visible';
+            topLink.style.opacity = '1';
         } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
+            topLink.style.visibility = 'hidden';
+            topLink.style.opacity = '0';
         }
-    };
-
+        
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateTopLinkVisibility);
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    updateTopLinkVisibility();
+})();
 </script>
 <script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
+(function() {
+    'use strict';
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+    
+    themeToggle.addEventListener('click', function() {
+        const isDark = document.body.classList.contains('dark');
+        
+        if (isDark) {
             document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
+            localStorage.setItem('pref-theme', 'light');
         } else {
             document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
+            localStorage.setItem('pref-theme', 'dark');
         }
-    })
-
+    });
+})();
 </script>
 </body>
 
