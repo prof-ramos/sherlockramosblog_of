@@ -5,14 +5,25 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 # Recent Changes
 
 **October 28, 2025**
+- **Implementação Completa Mobile-First CSS** (documented in `/docs/8-diagnostico-mobile-first.md`):
+  - **Breakpoints invertidos**: Desktop-first (`max-width`) → Mobile-first (`min-width`)
+  - **CSS movido para arquivo externo**: 291 linhas inline → 9 linhas (redução de 97%)
+  - **Menu responsivo robusto**: Cria/remove botão dinamicamente conforme viewport
+  - **Zero memory leaks**: Event listeners nomeados, removidos corretamente
+  - **Event delegation**: 1 listener no menu vs N em cada link
+  - **Tokens CSS completos**: Spacing, tipografia fluida (clamp), transitions, shadows
+  - **Breakpoints padronizados**: Mobile base → 640px → 769px → 1024px → 1440px
+  - **Arquivos criados**: `mobile-first.css` (450 linhas de CSS otimizado)
+  - **Arquivos atualizados**: `theme-vars.css` (valores mobile base), `zmedia.css` (min-width)
+  - **Performance**: CSS cacheable, debounced resize (150ms), cleanup automático
+  - **Impacto total**: -2,527 linhas de código duplicado nos HTML gerados
 - **Redesign Minimalista do Menu**:
   - Removido ícones sociais (GitHub, LinkedIn) - mantido apenas Twitter
   - Criado menu de navegação minimalista com efeitos UX/UI modernos
   - Efeitos implementados: glassmorphism, hover com elevação, indicador de página ativa
   - Animações suaves (cubic-bezier) e micro-interações
   - Menu totalmente acessível (focus states, keyboard navigation)
-  - Responsivo com design mobile-first
-  - Menu hambúrguer mobile otimizado: background sutil, borda definida, linhas 3px, sombra
+  - Menu hambúrguer mobile: background sutil, borda definida, linhas 3px, sombra
 - **Botões de Compartilhamento Personalizados**:
   - Mantidos apenas 3 redes nos posts: Twitter/X, WhatsApp, Instagram
   - Removidos: LinkedIn, Reddit, Facebook, Telegram, YCombinator
