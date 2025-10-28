@@ -78,8 +78,8 @@ body:not(.dark) #sun{display:none}
 #theme-toggle,.top-link{display:inline-block}
 </style>
 
-<link rel="preload" href="/assets/css/stylesheet.120dae77a1fa84312ff2d3ba1bdda23b1b68791d94b6609f1a151995d6c1f638.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-Eg2ud6H6hDEv8tO6G92iOxtoeR2UtmCfGhUZldbB9jg=" crossorigin="anonymous">
-<noscript><link rel="stylesheet" href="/assets/css/stylesheet.120dae77a1fa84312ff2d3ba1bdda23b1b68791d94b6609f1a151995d6c1f638.css" integrity="sha256-Eg2ud6H6hDEv8tO6G92iOxtoeR2UtmCfGhUZldbB9jg=" crossorigin="anonymous"></noscript>
+<link rel="preload" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous"></noscript>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -129,6 +129,9 @@ body:not(.dark) #sun{display:none}
 <script>
 (function() {
     'use strict';
+    
+    
+    document.documentElement.classList.add('js-enabled');
     
     let menuBtn = null;
     let overlay = null;
@@ -338,24 +341,30 @@ Bem-vindo ao meu site pessoal feito com Hugo e PaperMod!">
                     </svg>
                 </button>
             </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="/posts/" title="Posts">
-                    <span>Posts</span>
-                </a>
-            </li>
-            <li>
-                <a href="/about/" title="Sobre">
-                    <span class="active">Sobre</span>
-                </a>
-            </li>
-            <li>
-                <a href="/tags/" title="Tags">
-                    <span>Tags</span>
-                </a>
-            </li>
-        </ul>
+        </div><details id="menu-wrapper" class="menu-wrapper">
+            <summary class="mobile-menu-btn-fallback" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </summary>
+            <ul id="menu">
+                <li>
+                    <a href="/posts/" title="Posts">
+                        <span>Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/about/" title="Sobre">
+                        <span class="active">Sobre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+            </ul>
+        </details>
     </nav>
 </header>
 <main class="main"> 

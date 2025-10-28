@@ -116,7 +116,96 @@
 
 /* ===== 3. MENU MOBILE (BASE) ===== */
 
-/* Botão hamburger - SEMPRE visível em mobile */
+/* No-JS Fallback: details/summary (Progressive Enhancement) */
+.menu-wrapper {
+    position: relative;
+}
+
+/* Hide fallback button when JS is available */
+.js-enabled .mobile-menu-btn-fallback {
+    display: none !important;
+}
+
+/* Prevent details from affecting layout when JS is available */
+.js-enabled .menu-wrapper {
+    pointer-events: none; /* Disable details interaction */
+}
+
+.js-enabled .menu-wrapper #menu {
+    pointer-events: auto; /* Re-enable menu interaction */
+}
+
+/* Fallback summary button (styled like hamburger) */
+.mobile-menu-btn-fallback {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    background: rgba(15, 20, 25, 0.08);
+    border: 2px solid rgba(15, 20, 25, 0.2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
+    transition: all var(--transition-base);
+    list-style: none; /* Remove default arrow */
+}
+
+/* Remove default marker */
+.mobile-menu-btn-fallback::-webkit-details-marker {
+    display: none;
+}
+
+.mobile-menu-btn-fallback::marker {
+    display: none;
+}
+
+.dark .mobile-menu-btn-fallback {
+    background: rgba(232, 237, 244, 0.08);
+    border-color: rgba(232, 237, 244, 0.2);
+}
+
+.mobile-menu-btn-fallback:hover,
+.mobile-menu-btn-fallback:active {
+    background: rgba(15, 20, 25, 0.15);
+    border-color: rgba(15, 20, 25, 0.3);
+    transform: scale(1.05);
+}
+
+.dark .mobile-menu-btn-fallback:hover,
+.dark .mobile-menu-btn-fallback:active {
+    background: rgba(232, 237, 244, 0.15);
+    border-color: rgba(232, 237, 244, 0.3);
+}
+
+/* Hamburger lines for fallback */
+.mobile-menu-btn-fallback span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+}
+
+/* X animation when details is open (no-JS) */
+.menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* JS-enhanced button (created dynamically) */
 .mobile-menu-btn {
     display: flex;
     flex-direction: column;
@@ -202,6 +291,16 @@
 
 #menu.show-menu {
     right: 0;
+}
+
+/* No-JS Fallback: Show menu when details is open */
+.menu-wrapper[open] #menu {
+    right: 0;
+}
+
+.menu-wrapper[open] #menu li {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Itens do menu */
@@ -333,9 +432,15 @@ body.menu-open {
         --main-width: 720px;
     }
     
-    /* Esconde botão hamburger */
-    .mobile-menu-btn {
+    /* Esconde botão hamburger e fallback */
+    .mobile-menu-btn,
+    .mobile-menu-btn-fallback {
         display: none !important;
+    }
+    
+    /* Menu wrapper não afeta layout em desktop */
+    .menu-wrapper {
+        display: contents; /* Faz o wrapper "desaparecer" */
     }
     
     /* Menu horizontal */

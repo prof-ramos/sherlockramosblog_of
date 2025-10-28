@@ -1,7 +1,10 @@
-<!-- Mobile-First Menu JavaScript (Responsive, no memory leaks) -->
+<!-- Mobile-First Menu JavaScript (Progressive Enhancement) -->
 <script>
 (function() {
     'use strict';
+    
+    // Progressive Enhancement: Mark that JS is available
+    document.documentElement.classList.add('js-enabled');
     
     let menuBtn = null;
     let overlay = null;
