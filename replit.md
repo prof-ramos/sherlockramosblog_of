@@ -4,6 +4,14 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 
 # Recent Changes
 
+**October 28, 2025**
+- Configured PagesCMS for content management:
+  - Created `.pages.yml` configuration file
+  - Set up content collections for posts and about page
+  - Configured media uploads to `static/images/`
+  - Created comprehensive guide in `/docs/5-usando-pagescms.md`
+- CMS ready to use at https://pagescms.org (requires GitHub connection)
+
 **October 21, 2025**
 - Fixed deployment issues (final):
   - Created missing `google_analytics.html` partial template in PaperMod theme

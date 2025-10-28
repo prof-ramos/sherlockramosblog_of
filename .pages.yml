@@ -1,0 +1,82 @@
+# PagesCMS Configuration for Hugo PaperMod
+# Access your CMS at: https://pagescms.org
+
+# Media/Image Settings
+media:
+  input: static/images
+  output: /images
+
+# Content Collections
+content:
+  # Blog Posts
+  - name: posts
+    label: Posts do Blog
+    type: collection
+    path: content/posts
+    view:
+      fields:
+        - title
+        - date
+        - draft
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+        
+      - name: date
+        label: Data
+        type: datetime
+        required: true
+        
+      - name: draft
+        label: Rascunho
+        type: boolean
+        default: false
+        
+      - name: tags
+        label: Tags
+        type: list
+        
+      - name: categories
+        label: Categorias
+        type: list
+        
+      - name: description
+        label: Descrição
+        type: text
+        
+      - name: cover
+        label: Imagem de Capa
+        type: object
+        fields:
+          - name: image
+            label: Imagem
+            type: image
+          - name: alt
+            label: Texto Alternativo
+            type: string
+          - name: caption
+            label: Legenda
+            type: string
+        
+      - name: body
+        label: Conteúdo
+        type: rich-text
+
+  # About Page
+  - name: about
+    label: Página Sobre
+    type: single
+    path: content/about/_index.md
+    fields:
+      - name: title
+        label: Título
+        type: string
+        
+      - name: body
+        label: Conteúdo
+        type: markdown
+        
+  # Site Settings (not editable via PagesCMS, reference only)
+  # Edit hugo.yaml directly for theme configuration
