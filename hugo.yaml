@@ -45,6 +45,10 @@ params:
   socialIcons:
     - name: twitter
       url: "https://twitter.com/"
+    - name: whatsapp
+      url: "https://wa.me/"
+    - name: instagram
+      url: "https://instagram.com/"
 
   # Cover image
   cover:
