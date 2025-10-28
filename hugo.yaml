@@ -67,6 +67,17 @@ menu:
       url: /tags/
       weight: 30
 
+markup:
+  highlight:
+    noClasses: false # Use CSS classes instead of inline styles
+    style: monokai # Chroma style
+    lineNos: false
+    lineNumbersInTable: true
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: true
+    tabWidth: 4
+
 outputs:
   home:
     - HTML

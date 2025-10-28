@@ -148,3 +148,47 @@
     });
 })();
 </script>
+
+<!-- Conditional Chroma CSS Loading (Lazy Load) -->
+<script>
+(function() {
+    'use strict';
+    
+    // Check if page has code blocks
+    function hasCodeBlocks() {
+        return !!document.querySelector('.highlight, pre code, .chroma, pre.chroma');
+    }
+    
+    // Load Chroma CSS dynamically
+    function loadChromaCSS() {
+        if (document.getElementById('chroma-lazy-css')) {
+            return; // Already loaded
+        }
+        
+        // Load main Chroma styles
+        const link1 = document.createElement('link');
+        link1.id = 'chroma-lazy-css';
+        link1.rel = 'stylesheet';
+        link1.href = '/css/chroma-lazy.css';
+        document.head.appendChild(link1);
+        
+        // Load Chroma modifications
+        const link2 = document.createElement('link');
+        link2.id = 'chroma-mod-lazy-css';
+        link2.rel = 'stylesheet';
+        link2.href = '/css/chroma-mod-lazy.css';
+        document.head.appendChild(link2);
+        
+        console.log('[Chroma] Syntax highlighting CSS loaded (lazy) - ~5KB saved on pages without code');
+    }
+    
+    // Initialize on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        if (hasCodeBlocks()) {
+            loadChromaCSS();
+        } else {
+            console.log('[Chroma] No code blocks found, CSS not loaded (bandwidth saved!)');
+        }
+    });
+})();
+</script>

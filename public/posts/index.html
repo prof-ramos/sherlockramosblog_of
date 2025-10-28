@@ -77,8 +77,8 @@ body:not(.dark) #sun{display:none}
 #theme-toggle,.top-link{display:inline-block}
 </style>
 
-<link rel="preload" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous">
-<noscript><link rel="stylesheet" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous"></noscript>
+<link rel="preload" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous"></noscript>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -274,6 +274,50 @@ body:not(.dark) #sun{display:none}
     });
 })();
 </script>
+
+
+<script>
+(function() {
+    'use strict';
+    
+    
+    function hasCodeBlocks() {
+        return !!document.querySelector('.highlight, pre code, .chroma, pre.chroma');
+    }
+    
+    
+    function loadChromaCSS() {
+        if (document.getElementById('chroma-lazy-css')) {
+            return; 
+        }
+        
+        
+        const link1 = document.createElement('link');
+        link1.id = 'chroma-lazy-css';
+        link1.rel = 'stylesheet';
+        link1.href = '/css/chroma-lazy.css';
+        document.head.appendChild(link1);
+        
+        
+        const link2 = document.createElement('link');
+        link2.id = 'chroma-mod-lazy-css';
+        link2.rel = 'stylesheet';
+        link2.href = '/css/chroma-mod-lazy.css';
+        document.head.appendChild(link2);
+        
+        console.log('[Chroma] Syntax highlighting CSS loaded (lazy) - ~5KB saved on pages without code');
+    }
+    
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        if (hasCodeBlocks()) {
+            loadChromaCSS();
+        } else {
+            console.log('[Chroma] No code blocks found, CSS not loaded (bandwidth saved!)');
+        }
+    });
+})();
+</script>
 <meta property="og:url" content="/posts/">
   <meta property="og:site_name" content="Sherlock Ramos">
   <meta property="og:title" content="Posts">
@@ -378,6 +422,20 @@ body:not(.dark) #sun{display:none}
     </a>
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Exemplo com Código
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Este post contém exemplos de código para testar o lazy-loading do Chroma syntax highlighting.
+JavaScript function fibonacci(n) { if (n &lt;= 1) return n; return fibonacci(n - 1) &#43; fibonacci(n - 2); } console.log(fibonacci(10)); // 55 Python def factorial(n): if n == 0: return 1 return n * factorial(n - 1) print(factorial(5)) # 120 CSS .container { max-width: 1200px; margin: 0 auto; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); } O syntax highlighting deve funcionar perfeitamente com lazy-loading!
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-10-28 06:11:28 +0000 UTC'>28 de outubro de 2025</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>79 words</span>&nbsp;·&nbsp;<span>Me</span></footer>
+  <a class="entry-link" aria-label="post link to Exemplo com Código" href="/posts/exemplo-com-codigo/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">

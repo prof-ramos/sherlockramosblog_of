@@ -77,8 +77,8 @@ body:not(.dark) #sun{display:none}
 #theme-toggle,.top-link{display:inline-block}
 </style>
 
-<link rel="preload" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous">
-<noscript><link rel="stylesheet" href="/assets/css/stylesheet.e5ddc65bc2d175e190eb4b4681e0f02f9df5e962abc1de0a20f0ded0b6051126.css" integrity="sha256-5d3GW8LRdeGQ60tGgeDwL5316WKrwd4KIPDe0LYFESY=" crossorigin="anonymous"></noscript>
+<link rel="preload" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous"></noscript>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -271,6 +271,50 @@ body:not(.dark) #sun{display:none}
     
     window.addEventListener('orientationchange', function() {
         setTimeout(handleResize, 200);
+    });
+})();
+</script>
+
+
+<script>
+(function() {
+    'use strict';
+    
+    
+    function hasCodeBlocks() {
+        return !!document.querySelector('.highlight, pre code, .chroma, pre.chroma');
+    }
+    
+    
+    function loadChromaCSS() {
+        if (document.getElementById('chroma-lazy-css')) {
+            return; 
+        }
+        
+        
+        const link1 = document.createElement('link');
+        link1.id = 'chroma-lazy-css';
+        link1.rel = 'stylesheet';
+        link1.href = '/css/chroma-lazy.css';
+        document.head.appendChild(link1);
+        
+        
+        const link2 = document.createElement('link');
+        link2.id = 'chroma-mod-lazy-css';
+        link2.rel = 'stylesheet';
+        link2.href = '/css/chroma-mod-lazy.css';
+        document.head.appendChild(link2);
+        
+        console.log('[Chroma] Syntax highlighting CSS loaded (lazy) - ~5KB saved on pages without code');
+    }
+    
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        if (hasCodeBlocks()) {
+            loadChromaCSS();
+        } else {
+            console.log('[Chroma] No code blocks found, CSS not loaded (bandwidth saved!)');
+        }
     });
 })();
 </script>

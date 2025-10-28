@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Sherlock Ramos</title>
-    <link>/posts/</link>
-    <description>Recent content in Posts on Sherlock Ramos</description>
+    <title>Código on Sherlock Ramos</title>
+    <link>/tags/c%C3%B3digo/</link>
+    <description>Recent content in Código on Sherlock Ramos</description>
     <generator>Hugo -- 0.146.0</generator>
     <language>pt-br</language>
     <lastBuildDate>Tue, 28 Oct 2025 06:11:28 +0000</lastBuildDate>
-    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/c%C3%B3digo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exemplo com Código</title>
       <link>/posts/exemplo-com-codigo/</link>
@@ -36,13 +36,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;background&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;linear-gradient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;135&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;deg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;#667eea&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;#764ba2&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;O syntax highlighting deve funcionar perfeitamente com lazy-loading!&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Hello</title>
-      <link>/posts/hello/</link>
-      <pubDate>Wed, 01 Dec 2021 22:50:26 +0000</pubDate>
-      <guid>/posts/hello/</guid>
-      <description>&lt;p&gt;oh hi&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
