@@ -180,9 +180,13 @@ body:not(.dark) #sun{display:none}
     }
     
     function toggleMenu() {
-        if (!menu || !menuBtn || !overlay) return;
+        if (!menu || !menuBtn || !overlay) {
+            console.error('[Menu] toggleMenu: missing elements - menu=', !!menu, 'menuBtn=', !!menuBtn, 'overlay=', !!overlay);
+            return;
+        }
         
         const isOpen = menuBtn.classList.contains('active');
+        console.log('[Menu] toggleMenu: opening=', !isOpen);
         
         menuBtn.classList.toggle('active');
         menu.classList.toggle('show-menu');
@@ -196,7 +200,12 @@ body:not(.dark) #sun{display:none}
     
     function createMobileMenu() {
         const nav = document.querySelector('.nav');
-        if (!nav || menuBtn) return; 
+        if (!nav || menuBtn) {
+            console.log('[Menu] createMobileMenu: nav=', !!nav, 'menuBtn already exists=', !!menuBtn);
+            return; 
+        }
+        
+        console.log('[Menu] Creating mobile menu button...');
         
         
         menuBtn = document.createElement('button');
@@ -214,7 +223,12 @@ body:not(.dark) #sun{display:none}
         
         
         menu = document.getElementById('menu');
-        if (!menu) return;
+        if (!menu) {
+            console.error('[Menu] ERROR: #menu element not found!');
+            return;
+        }
+        
+        console.log('[Menu] Mobile menu created successfully');
         
         
         menuBtn.addEventListener('click', toggleMenu);
@@ -249,7 +263,10 @@ body:not(.dark) #sun{display:none}
     }
     
     function handleResize() {
-        if (isMobile()) {
+        const mobile = isMobile();
+        console.log('[Menu] handleResize: width=', window.innerWidth, 'isMobile=', mobile);
+        
+        if (mobile) {
             
             createMobileMenu();
         } else {
@@ -260,6 +277,7 @@ body:not(.dark) #sun{display:none}
     
     
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('[Menu] DOMContentLoaded - initializing...');
         handleResize();
     });
     
