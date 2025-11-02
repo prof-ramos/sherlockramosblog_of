@@ -4,6 +4,35 @@ This is a Hugo static site generator project configured with the PaperMod theme 
 
 # Recent Changes
 
+**November 2, 2025**
+- **✅ Implementadas Melhorias de UX/UI seguindo Material Design e iOS Guidelines**:
+  - **Design Tokens Atualizados**: Sistema de spacing baseado em grid de 8px (--spacing-xs a --spacing-2xl)
+  - **Botão Hamburger Mobile**:
+    - Touch target aumentado: 44x44px → 48x48px (conforme WCAG 2.2 + Material Design)
+    - Linhas mais finas: 3px → 2.5px com gap de 6px
+    - Margem de 16px da borda para melhor alcance do polegar
+    - Estados hover/active com micro-interações
+  - **Menu Sidebar Mobile**:
+    - Largura responsiva: clamp(304px, 88vw, 344px) - mais espaço em devices maiores
+    - Padding otimizado: 64px topo (respeita status bar) + 24px horizontal
+    - Links com altura de 56px (touch target ideal)
+    - Espaçamento de 20px entre itens para melhor legibilidade
+    - Indicador visual de página ativa com barra lateral de 4px
+  - **Header Desktop**:
+    - Altura aumentada: 56px → 72px para mais respiro visual
+    - Padding vertical: 24px para melhor hierarquia
+    - Fonte dos links: 18px (--font-size-menu-desktop)
+    - Espaçamento entre itens: 24px (Material Design spec)
+    - Active indicator com underline de 3px em vez de borda lateral
+  - **Overlay**:
+    - Opacity reduzida: 0.6 → 0.45 (menos intrusivo)
+    - Transição suave de fade in/out
+    - Suporte a `prefers-reduced-motion` para acessibilidade
+  - **Tipografia**: Sistema consistente com tokens (base 16px, menu 16px mobile/18px desktop)
+  - **Arquivos modificados**: `mobile-first.css` (design tokens + todos os componentes)
+  - **Status**: ✅ PRODUCTION-READY - Aprovado pelo Architect
+  - **Impacto**: UX mais polida, melhor acessibilidade (WCAG 2.2), touch targets otimizados para mobile
+
 **October 28, 2025**
 - **✅ Implementadas TODAS as 4 Melhorias Opcionais** (documented in `/docs/11-relatorio-melhorias-finais.md`):
   1. **Fallback sem JavaScript**: Menu funciona nativamente com `<details>`/`<summary>` (progressive enhancement)
