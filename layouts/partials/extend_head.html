@@ -53,13 +53,9 @@
     }
     
     function toggleMenu() {
-        if (!menu || !menuBtn || !overlay) {
-            console.error('[Menu] toggleMenu: missing elements - menu=', !!menu, 'menuBtn=', !!menuBtn, 'overlay=', !!overlay);
-            return;
-        }
+        if (!menu || !menuBtn || !overlay) return;
         
         const isOpen = menuBtn.classList.contains('active');
-        console.log('[Menu] toggleMenu: opening=', !isOpen);
         
         menuBtn.classList.toggle('active');
         menu.classList.toggle('show-menu');
@@ -73,12 +69,7 @@
     
     function createMobileMenu() {
         const nav = document.querySelector('.nav');
-        if (!nav || menuBtn) {
-            console.log('[Menu] createMobileMenu: nav=', !!nav, 'menuBtn already exists=', !!menuBtn);
-            return; // Already created
-        }
-        
-        console.log('[Menu] Creating mobile menu button...');
+        if (!nav || menuBtn) return; // Already created
         
         // Create button
         menuBtn = document.createElement('button');
@@ -96,12 +87,7 @@
         
         // Get menu
         menu = document.getElementById('menu');
-        if (!menu) {
-            console.error('[Menu] ERROR: #menu element not found!');
-            return;
-        }
-        
-        console.log('[Menu] Mobile menu created successfully');
+        if (!menu) return;
         
         // Events - all named functions, added once
         menuBtn.addEventListener('click', toggleMenu);
@@ -136,10 +122,7 @@
     }
     
     function handleResize() {
-        const mobile = isMobile();
-        console.log('[Menu] handleResize: width=', window.innerWidth, 'isMobile=', mobile);
-        
-        if (mobile) {
+        if (isMobile()) {
             // Mobile/Tablet - ensure menu button exists
             createMobileMenu();
         } else {
@@ -150,7 +133,6 @@
     
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('[Menu] DOMContentLoaded - initializing...');
         handleResize();
     });
     

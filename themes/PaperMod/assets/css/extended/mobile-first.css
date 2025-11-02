@@ -293,14 +293,73 @@
     right: 0;
 }
 
-/* No-JS Fallback: Show menu when details is open */
-.menu-wrapper[open] #menu {
+/* Hide fallback menu when JS is enabled */
+.js-enabled #menu-fallback {
+    display: none !important;
+}
+
+/* No-JS Fallback: Show fallback menu when details is open */
+.menu-wrapper[open] #menu-fallback {
+    display: flex !important;
     right: 0;
 }
 
-.menu-wrapper[open] #menu li {
+.menu-wrapper[open] #menu-fallback li {
     opacity: 1;
     transform: translateX(0);
+}
+
+/* Style fallback menu same as main menu */
+#menu-fallback {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(280px, 85vw);
+    height: 100vh;
+    background: var(--theme);
+    padding: 80px 0 20px;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: right var(--transition-base);
+}
+
+.dark #menu-fallback {
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#menu-fallback li {
+    width: 100%;
+}
+
+#menu-fallback li a {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: var(--font-size-lg);
+    border-radius: 0;
+    border-left: 3px solid transparent;
+    transition: all var(--transition-base);
+    min-height: var(--touch-target-min);
+    display: flex;
+    align-items: center;
+}
+
+#menu-fallback li a:hover,
+#menu-fallback li a:active {
+    background: rgba(15, 20, 25, 0.08);
+    border-left-color: var(--primary);
+    transform: translateX(4px);
+}
+
+.dark #menu-fallback li a:hover,
+.dark #menu-fallback li a:active {
+    background: rgba(232, 237, 244, 0.08);
 }
 
 /* Itens do menu */

@@ -77,8 +77,8 @@ body:not(.dark) #sun{display:none}
 #theme-toggle,.top-link{display:inline-block}
 </style>
 
-<link rel="preload" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous">
-<noscript><link rel="stylesheet" href="/assets/css/stylesheet.057f6a7c97062c95013f19053c9708a48ce438f5bfc5c628e245d4f5d6eb5841.css" integrity="sha256-BX9qfJcGLJUBPxkFPJcIpIzkOPW/xcYo4kXU9dbrWEE=" crossorigin="anonymous"></noscript>
+<link rel="preload" href="/assets/css/stylesheet.ae772bb1316072fb57971719c3069d5dee70898642c8e66bed08d4073f961d31.css" as="style" onload="this.onload=null;this.rel='stylesheet'" integrity="sha256-rncrsTFgcvtXlxcZwwadXe5wiYZCyOZr7QjUBz&#43;WHTE=" crossorigin="anonymous">
+<noscript><link rel="stylesheet" href="/assets/css/stylesheet.ae772bb1316072fb57971719c3069d5dee70898642c8e66bed08d4073f961d31.css" integrity="sha256-rncrsTFgcvtXlxcZwwadXe5wiYZCyOZr7QjUBz&#43;WHTE=" crossorigin="anonymous"></noscript>
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -178,13 +178,9 @@ body:not(.dark) #sun{display:none}
     }
     
     function toggleMenu() {
-        if (!menu || !menuBtn || !overlay) {
-            console.error('[Menu] toggleMenu: missing elements - menu=', !!menu, 'menuBtn=', !!menuBtn, 'overlay=', !!overlay);
-            return;
-        }
+        if (!menu || !menuBtn || !overlay) return;
         
         const isOpen = menuBtn.classList.contains('active');
-        console.log('[Menu] toggleMenu: opening=', !isOpen);
         
         menuBtn.classList.toggle('active');
         menu.classList.toggle('show-menu');
@@ -198,12 +194,7 @@ body:not(.dark) #sun{display:none}
     
     function createMobileMenu() {
         const nav = document.querySelector('.nav');
-        if (!nav || menuBtn) {
-            console.log('[Menu] createMobileMenu: nav=', !!nav, 'menuBtn already exists=', !!menuBtn);
-            return; 
-        }
-        
-        console.log('[Menu] Creating mobile menu button...');
+        if (!nav || menuBtn) return; 
         
         
         menuBtn = document.createElement('button');
@@ -221,12 +212,7 @@ body:not(.dark) #sun{display:none}
         
         
         menu = document.getElementById('menu');
-        if (!menu) {
-            console.error('[Menu] ERROR: #menu element not found!');
-            return;
-        }
-        
-        console.log('[Menu] Mobile menu created successfully');
+        if (!menu) return;
         
         
         menuBtn.addEventListener('click', toggleMenu);
@@ -261,10 +247,7 @@ body:not(.dark) #sun{display:none}
     }
     
     function handleResize() {
-        const mobile = isMobile();
-        console.log('[Menu] handleResize: width=', window.innerWidth, 'isMobile=', mobile);
-        
-        if (mobile) {
+        if (isMobile()) {
             
             createMobileMenu();
         } else {
@@ -275,7 +258,6 @@ body:not(.dark) #sun{display:none}
     
     
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('[Menu] DOMContentLoaded - initializing...');
         handleResize();
     });
     
@@ -421,8 +403,7 @@ if ('serviceWorker' in navigator) {
                 <span></span>
                 <span></span>
                 <span></span>
-            </summary>
-            <ul id="menu">
+            </summary><ul id="menu-fallback">
                 <li>
                     <a href="/posts/" title="Posts">
                         <span>Posts</span>
@@ -439,7 +420,23 @@ if ('serviceWorker' in navigator) {
                     </a>
                 </li>
             </ul>
-        </details>
+        </details><ul id="menu">
+            <li>
+                <a href="/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/" title="Sobre">
+                    <span>Sobre</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
     </nav>
 </header>
 <main class="main">
