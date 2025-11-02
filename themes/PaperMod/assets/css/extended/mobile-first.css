@@ -6,7 +6,15 @@
 
 /* ===== 1. DESIGN TOKENS ===== */
 :root {
-    /* Spacing System (Mobile base) */
+    /* Spacing System (8px baseline grid) */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* Legacy spacing (mantido por compatibilidade) */
     --gap: 14px;
     --content-gap: 16px;
     --nav-width: 100%;
@@ -14,19 +22,39 @@
     
     /* Layout Heights */
     --header-height: 56px;
+    --header-height-desktop: 72px;
     --footer-height: 56px;
+    
+    /* Menu Mobile Dimensions */
+    --menu-width-mobile: clamp(304px, 88vw, 344px);
+    --menu-padding-top: 64px;
+    --menu-padding-horizontal: 24px;
+    --menu-item-height: 56px;
+    --menu-item-spacing: 20px;
+    
+    /* Touch Targets (WCAG 2.2 + Material Design) */
+    --touch-target-min: 48px;
+    --touch-target-spacing: 16px;
+    
+    /* Hamburger Button */
+    --hamburger-size: 48px;
+    --hamburger-line-width: 22px;
+    --hamburger-line-height: 2.5px;
+    --hamburger-line-gap: 6px;
     
     /* Border Radius */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
     
-    /* Tipografia Fluida */
-    --font-size-base: clamp(16px, 4vw, 18px);
-    --font-size-sm: clamp(14px, 3.5vw, 16px);
-    --font-size-lg: clamp(18px, 4.5vw, 20px);
-    --font-size-xl: clamp(24px, 6vw, 32px);
-    --font-size-2xl: clamp(32px, 8vw, 40px);
+    /* Typography */
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-menu: 16px;
+    --font-size-menu-desktop: 18px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -38,8 +66,8 @@
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* Touch Targets (WCAG 2.2) */
-    --touch-target-min: 44px;
+    /* Overlay */
+    --overlay-opacity: 0.45;
 }
 
 /* ===== 2. HEADER & NAVIGATION (MOBILE BASE) ===== */
@@ -127,15 +155,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
+    gap: var(--hamburger-line-gap);
+    width: var(--hamburger-size);
+    height: var(--hamburger-size);
+    margin-right: var(--touch-target-spacing);
     background: rgba(15, 20, 25, 0.05);
     border: 1px solid rgba(15, 20, 25, 0.15);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     z-index: 1001;
     transition: all var(--transition-base);
+    /* Increased touch area for better UX */
+    padding: 0;
+    position: relative;
 }
 
 /* Show static button when JS is available */
@@ -148,17 +180,27 @@
     border-color: rgba(232, 237, 244, 0.2);
 }
 
+.mobile-menu-btn-static:hover {
+    background: rgba(15, 20, 25, 0.1);
+    transform: scale(1.02);
+}
+
+.dark .mobile-menu-btn-static:hover {
+    background: rgba(232, 237, 244, 0.12);
+}
+
 .mobile-menu-btn-static span {
     display: block;
-    width: 22px;
-    height: 3px;
+    width: var(--hamburger-line-width);
+    height: var(--hamburger-line-height);
     background: var(--primary);
-    border-radius: 2px;
+    border-radius: calc(var(--hamburger-line-height) / 2);
     transition: all var(--transition-base);
 }
 
+/* Animação X quando aberto - ajustada para linhas mais finas */
 .mobile-menu-btn-static.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(6.5px, 6.5px);
 }
 
 .mobile-menu-btn-static.active span:nth-child(2) {
@@ -166,10 +208,10 @@
 }
 
 .mobile-menu-btn-static.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6.5px, -6.5px);
 }
 
-/* Static overlay */
+/* Static overlay - improved UX with opacity transition */
 .menu-overlay-static {
     display: none;
     position: fixed;
@@ -177,13 +219,23 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, var(--overlay-opacity));
     z-index: 999;
     cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-base);
 }
 
 .menu-overlay-static.show {
     display: block;
+    opacity: 1;
+}
+
+/* Respeitar preferência de animações reduzidas */
+@media (prefers-reduced-motion: reduce) {
+    .menu-overlay-static {
+        transition: none;
+    }
 }
 
 /* Hide fallback button when JS is available */
@@ -256,19 +308,19 @@
     border-color: rgba(232, 237, 244, 0.3);
 }
 
-/* Hamburger lines for fallback */
+/* Hamburger lines for fallback - usando design tokens */
 .mobile-menu-btn-fallback span {
     display: block;
-    width: 22px;
-    height: 3px;
+    width: var(--hamburger-line-width);
+    height: var(--hamburger-line-height);
     background: var(--primary);
-    border-radius: 2px;
+    border-radius: calc(var(--hamburger-line-height) / 2);
     transition: all var(--transition-base);
 }
 
-/* X animation when details is open (no-JS) */
+/* X animation when details is open (no-JS) - ajustada para linhas mais finas */
 .menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(6.5px, 6.5px);
 }
 
 .menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(2) {
@@ -276,7 +328,7 @@
 }
 
 .menu-wrapper[open] .mobile-menu-btn-fallback span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6.5px, -6.5px);
 }
 
 /* JS-enhanced button (created dynamically) */
@@ -316,19 +368,19 @@
     border-color: rgba(232, 237, 244, 0.3);
 }
 
-/* Linhas do hamburger */
+/* Linhas do hamburger - usando design tokens */
 .mobile-menu-btn span {
     display: block;
-    width: 22px;
-    height: 3px;
+    width: var(--hamburger-line-width);
+    height: var(--hamburger-line-height);
     background: var(--primary);
-    border-radius: 2px;
+    border-radius: calc(var(--hamburger-line-height) / 2);
     transition: all var(--transition-base);
 }
 
-/* Animação X quando aberto */
+/* Animação X quando aberto - ajustada para linhas mais finas */
 .mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(6.5px, 6.5px);
 }
 
 .mobile-menu-btn.active span:nth-child(2) {
@@ -336,27 +388,34 @@
 }
 
 .mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6.5px, -6.5px);
 }
 
-/* Menu mobile - sidebar deslizante */
+/* Menu mobile - sidebar deslizante (Material Design compliant) */
 #menu {
     display: flex;
     position: fixed;
     top: 0;
     right: -100%;
-    width: min(280px, 85vw);
+    width: var(--menu-width-mobile);
     height: 100vh;
     background: var(--theme);
-    padding: 80px 0 20px;
+    padding: var(--menu-padding-top) 0 var(--spacing-lg);
     flex-direction: column;
-    gap: 0;
+    gap: var(--spacing-xs);
     align-items: stretch;
     transition: right var(--transition-slow);
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+}
+
+/* Respeitar preferência de animações reduzidas */
+@media (prefers-reduced-motion: reduce) {
+    #menu {
+        transition: none;
+    }
 }
 
 .dark #menu {
@@ -456,24 +515,24 @@
 #menu.show-menu li:nth-child(4) { transition-delay: 0.25s; }
 #menu.show-menu li:nth-child(5) { transition-delay: 0.3s; }
 
-/* Links do menu */
+/* Links do menu - otimizado para touch targets (Material Design) */
 #menu li a {
-    display: block;
-    padding: 1rem 2rem;
-    font-size: var(--font-size-lg);
-    border-radius: 0;
-    border-left: 3px solid transparent;
-    transition: all var(--transition-base);
-    min-height: var(--touch-target-min);
     display: flex;
     align-items: center;
+    padding: var(--spacing-md) var(--menu-padding-horizontal);
+    min-height: var(--menu-item-height);
+    font-size: var(--font-size-menu);
+    border-radius: 0;
+    border-left: 4px solid transparent;
+    transition: all var(--transition-base);
+    position: relative;
 }
 
 #menu li a:hover,
 #menu li a:active {
     background: rgba(15, 20, 25, 0.08);
     border-left-color: var(--primary);
-    transform: translateX(4px);
+    transform: translateX(6px);
 }
 
 .dark #menu li a:hover,
@@ -481,14 +540,26 @@
     background: rgba(232, 237, 244, 0.08);
 }
 
-/* Active page indicator */
+/* Active page indicator - melhor contraste visual */
 #menu li a span.active {
     color: var(--primary);
     font-weight: 600;
     position: relative;
 }
 
-/* Overlay escuro */
+#menu li a span.active::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--menu-padding-horizontal));
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 0 2px 2px 0;
+}
+
+/* Overlay escuro - usa token de opacity */
 .menu-overlay {
     display: none;
     position: fixed;
@@ -496,13 +567,23 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, var(--overlay-opacity));
     z-index: 999;
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity var(--transition-base);
 }
 
 .menu-overlay.show {
     display: block;
+    opacity: 1;
+}
+
+/* Respeitar preferência de animações reduzidas */
+@media (prefers-reduced-motion: reduce) {
+    .menu-overlay {
+        transition: none;
+    }
 }
 
 /* Previne scroll do body quando menu aberto */
@@ -563,6 +644,7 @@ body.menu-open {
         --content-gap: 20px;
         --nav-width: 1024px;
         --main-width: 720px;
+        --header-height: var(--header-height-desktop);
     }
     
     /* Esconde botão hamburger e fallback */
@@ -576,7 +658,17 @@ body.menu-open {
         display: contents; /* Faz o wrapper "desaparecer" */
     }
     
-    /* Menu horizontal */
+    /* Header com altura aumentada */
+    .header {
+        min-height: var(--header-height-desktop);
+    }
+    
+    .nav {
+        padding: var(--spacing-lg) var(--gap);
+        min-height: var(--header-height-desktop);
+    }
+    
+    /* Menu horizontal - espaçamento otimizado */
     #menu {
         display: flex !important;
         position: static;
@@ -585,8 +677,8 @@ body.menu-open {
         height: auto;
         background: transparent;
         padding: 0;
-        margin: auto var(--gap);
-        gap: 0.5rem;
+        margin: 0 var(--spacing-lg);
+        gap: var(--spacing-lg); /* 24px conforme Material Design */
         box-shadow: none;
         align-items: center;
         overflow: visible;
@@ -601,11 +693,12 @@ body.menu-open {
     }
     
     #menu li a {
-        padding: 0.5rem 1rem;
+        padding: var(--spacing-md) var(--spacing-lg);
         border-radius: var(--radius-md);
         border-left: none;
-        font-size: 0.95rem;
+        font-size: var(--font-size-menu-desktop);
         min-height: auto;
+        font-weight: 500;
     }
     
     #menu li a:hover {
@@ -617,16 +710,24 @@ body.menu-open {
         background: rgba(232, 237, 244, 0.08);
     }
     
-    /* Active indicator diferente */
+    /* Active indicator diferente - underline em vez de borda */
+    #menu li a span.active {
+        position: relative;
+    }
+    
+    #menu li a span.active::before {
+        display: none; /* Remove a barra lateral em desktop */
+    }
+    
     #menu li a span.active::after {
         content: '';
         position: absolute;
-        bottom: -4px;
+        bottom: -6px;
         left: 0;
         width: 100%;
-        height: 2px;
+        height: 3px;
         background: var(--primary);
-        border-radius: 2px;
+        border-radius: 2px 2px 0 0;
     }
     
     /* Overlay nunca aparece */
