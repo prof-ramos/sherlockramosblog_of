@@ -121,6 +121,71 @@
     position: relative;
 }
 
+/* Static menu button (always in HTML, shown only with JS + mobile viewport) */
+.mobile-menu-btn-static {
+    display: none; /* Hidden by default (no JS or desktop) */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: rgba(15, 20, 25, 0.05);
+    border: 1px solid rgba(15, 20, 25, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all var(--transition-base);
+}
+
+/* Show static button when JS is available */
+.js-enabled .mobile-menu-btn-static {
+    display: flex;
+}
+
+.dark .mobile-menu-btn-static {
+    background: rgba(232, 237, 244, 0.08);
+    border-color: rgba(232, 237, 244, 0.2);
+}
+
+.mobile-menu-btn-static span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+}
+
+.mobile-menu-btn-static.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.mobile-menu-btn-static.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn-static.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Static overlay */
+.menu-overlay-static {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    cursor: pointer;
+}
+
+.menu-overlay-static.show {
+    display: block;
+}
+
 /* Hide fallback button when JS is available */
 .js-enabled .mobile-menu-btn-fallback {
     display: none !important;
@@ -133,6 +198,15 @@
 
 .js-enabled .menu-wrapper #menu {
     pointer-events: auto; /* Re-enable menu interaction */
+}
+
+/* === RESPONSIVENESS: Hide mobile button on desktop === */
+@media screen and (min-width: 1024px) {
+    .mobile-menu-btn-static,
+    .mobile-menu-btn-fallback,
+    .menu-overlay-static {
+        display: none !important;
+    }
 }
 
 /* Fallback summary button (styled like hamburger) */

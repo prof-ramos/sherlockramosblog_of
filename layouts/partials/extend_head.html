@@ -1,10 +1,12 @@
 <!-- Mobile-First Menu JavaScript (Progressive Enhancement) -->
 <script>
+console.log('[MENU] Script loading...');
 (function() {
     'use strict';
     
     // Progressive Enhancement: Mark that JS is available
     document.documentElement.classList.add('js-enabled');
+    console.log('[MENU] js-enabled class added');
     
     let menuBtn = null;
     let overlay = null;
@@ -133,6 +135,7 @@
     
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('[MENU] DOM loaded, width:', window.innerWidth, 'isMobile:', isMobile());
         handleResize();
     });
     

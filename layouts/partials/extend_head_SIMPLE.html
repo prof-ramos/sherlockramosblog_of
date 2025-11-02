@@ -1,0 +1,113 @@
+<!-- SIMPLIFIED Mobile Menu -->
+<script>
+(function() {
+    'use strict';
+    console.log('[MENU SIMPLE] Loading...');
+    
+    document.documentElement.classList.add('js-enabled');
+    
+    function initMenu() {
+        console.log('[MENU SIMPLE] Initializing, width:', window.innerWidth);
+        const menuBtn = document.querySelector('.mobile-menu-btn-static');
+        const menu = document.getElementById('menu');
+        const overlay = document.querySelector('.menu-overlay-static');
+        
+        if (!menuBtn || !menu || !overlay) {
+            console.error('[MENU SIMPLE] Elements not found!', {menuBtn: !!menuBtn, menu: !!menu, overlay: !!overlay});
+            return;
+        }
+        
+        console.log('[MENU SIMPLE] All elements found, attaching events...');
+        
+        function toggleMenu() {
+            console.log('[MENU SIMPLE] Toggle called!');
+            menuBtn.classList.toggle('active');
+            menu.classList.toggle('show-menu');
+            overlay.classList.toggle('show');
+            document.body.classList.toggle('menu-open');
+        }
+        
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        
+        menu.addEventListener('click', function(e) {
+            if (e.target.closest('a')) {
+                toggleMenu();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menu.classList.contains('show-menu')) {
+                toggleMenu();
+            }
+        });
+        
+        console.log('[MENU SIMPLE] Menu initialized successfully!');
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMenu);
+    } else {
+        initMenu();
+    }
+})();
+</script>
+
+<!-- WebP Detection -->
+<script>
+(function() {
+    'use strict';
+    function checkWebPSupport() {
+        const elem = document.createElement('canvas');
+        if (elem.getContext && elem.getContext('2d')) {
+            const support = elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+            document.documentElement.classList.add(support ? 'webp' : 'no-webp');
+            console.log('[WebP] Browser ' + (support ? 'supports' : 'does NOT support') + ' WebP format');
+        }
+    }
+    checkWebPSupport();
+})();
+</script>
+
+<!-- Lazy Chroma -->
+<script>
+(function() {
+    'use strict';
+    function loadChroma() {
+        if (document.querySelector('.highlight, pre code, .chroma')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/css/chroma-lazy.css';
+            document.head.appendChild(link);
+            console.log('[Chroma] CSS loaded');
+        } else {
+            console.log('[Chroma] No code blocks found, CSS not loaded (bandwidth saved!)');
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadChroma);
+    } else {
+        loadChroma();
+    }
+})();
+</script>
+
+<!-- Service Worker -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#161b2e">
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function(registration) {
+                console.log('[SW] Service Worker registered successfully:', registration.scope);
+                registration.addEventListener('updatefound', function() {
+                    console.log('[SW] Update found, new version installing...');
+                });
+            })
+            .catch(function(error) {
+                console.log('[SW] Service Worker registration failed:', error);
+            });
+    });
+}
+</script>

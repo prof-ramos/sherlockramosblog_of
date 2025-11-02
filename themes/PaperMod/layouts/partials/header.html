@@ -122,6 +122,12 @@
             </div>
         </div>
         {{- $currentPage := . }}
+        {{- /* Mobile menu button (static in HTML, shown/hidden by CSS) */ -}}
+        <button class="mobile-menu-btn-static" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         {{- /* No-JS Fallback: <details> with duplicate menu for when JS is disabled */ -}}
         <details id="menu-wrapper" class="menu-wrapper">
             <summary class="mobile-menu-btn-fallback" aria-label="Menu">
@@ -183,4 +189,6 @@
             {{- end }}
         </ul>
     </nav>
+    {{- /* Mobile menu overlay (static in HTML, shown/hidden by CSS) */ -}}
+    <div class="menu-overlay-static" aria-hidden="true"></div>
 </header>
