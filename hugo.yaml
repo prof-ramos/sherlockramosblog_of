@@ -14,7 +14,7 @@ params:
     enabled: true
     title: "Bem-vindo ao meu caos"
     subtitle: ""
-    imageUrl: "" # URL da sua imagem de perfil
+    imageUrl: "images/profile.jpg" # Caminho relativo a assets/
     imageTitle: "Minha foto"
     imageWidth: 120
     imageHeight: 120
