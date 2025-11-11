@@ -14,7 +14,7 @@ params:
     enabled: true
     title: "Sherlock Ramos - Blog"
     subtitle: ""
-    imageUrl: "" # URL da sua imagem de perfil
+    imageUrl: "/images/IMG_0293.JPG" # URL da sua imagem de perfil
     imageTitle: "Minha foto"
     imageWidth: 120
     imageHeight: 120
