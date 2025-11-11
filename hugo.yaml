@@ -7,12 +7,12 @@ theme: PaperMod
 params:
   env: production
   description: ""
-  author: Me
+  author: Gabriel Ramos
   
   # ProfileMode (ProfileMod)
   profileMode:
     enabled: true
-    title: "Bem-vindo ao meu caos"
+    title: "Sherlock Ramos - Blog"
     subtitle: ""
     imageUrl: "" # URL da sua imagem de perfil
     imageTitle: "Minha foto"
@@ -44,7 +44,7 @@ params:
   # Ícones de redes sociais
   socialIcons:
     - name: twitter
-      url: "https://twitter.com/"
+      url: "https://x.com/GatoMaconhado_"
 
   # Cover image
   cover:
